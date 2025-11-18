@@ -1,0 +1,1 @@
+alert("Static website with Docker is running!");
