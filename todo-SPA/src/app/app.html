@@ -1,0 +1,19 @@
+<div>
+  <h1>Welcome to Todo SPA</h1>
+  <p>This is a single-page application for managing your todo list.</p>
+  <div>
+    <input #newTodo type="text" placeholder="Add a new todo" />
+    <button (click)="addTodo(newTodo.value)">Add</button>
+  </div>
+  <div>
+    <span>Your Todos:</span>
+    <ul>
+      @for (todo of todos; track todo)
+      {
+        <li>{{ todo }}</li>
+      } @empty {
+        <li>You have nothing to do for now.</li>
+      }
+    </ul>
+  </div>
+</div>
