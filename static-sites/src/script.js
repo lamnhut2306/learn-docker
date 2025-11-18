@@ -1,0 +1,1 @@
+console.log("Static website with Docker is running!");
