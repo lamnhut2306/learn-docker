@@ -1,0 +1,8 @@
+<ul>
+    @for (item of todoItems; track $index) {
+        <a [routerLink]="['/todos', item.id]">{{ item.title }}</a>
+    }
+    @empty {
+        <span>No todo items found.</span>
+    }
+</ul>
