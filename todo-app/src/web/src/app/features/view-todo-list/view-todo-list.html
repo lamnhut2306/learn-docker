@@ -1,0 +1,11 @@
+<div class="page">
+    <button [routerLink]="['todo', '']">Create New Todo</button>
+    <p>Todo:</p>
+    <ul>
+        @for (item of todos; track $index) {
+        <li [routerLink]="['todo', item.id]">{{ item.title }}</li>
+        } @empty {
+        <p>No todo items found.</p>
+        }
+    </ul>
+</div>

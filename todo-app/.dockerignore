@@ -1,0 +1,17 @@
+**/bin/
+**/obj/
+**/out/
+
+*.Development.*
+
+#web
+**/dist/
+**/node_modules/
+**/vscode/
+**/angular/
+
+**/readme.md
+**/dockerfile*
+**/.editorconfig
+**/.gitignore
+**/docker-compose.yml

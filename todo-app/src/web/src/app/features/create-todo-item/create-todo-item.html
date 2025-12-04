@@ -1,0 +1,22 @@
+<form (ngSubmit)="submit()" [formGroup]="newTodoItemForm">
+  <div>
+    <label for="title">Title</label><br />
+    <input id="title" name="title" formControlName="title" />
+  </div>
+
+  <div>
+    <label for="description">Description</label><br />
+    <textarea id="description" name="description" rows="4" formControlName="description"></textarea>
+  </div>
+
+  @if(error) {
+    <div style="color: #b00020; margin-top: 8px;">
+    {{ error }}
+  </div>
+  }
+
+  <div style="margin-top: 12px;">
+    <button type="submit" [disabled]="isSaving || newTodoItemForm.invalid">Create</button>
+    <button type="button" (click)="cancel()">Cancel</button>
+  </div>
+</form>

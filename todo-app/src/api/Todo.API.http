@@ -1,0 +1,8 @@
+@host = http://localhost:5000
+
+GET {{host}}/todos/
+Accept: application/json
+
+###
+GET {{host}}/todos/019a9f2a-e063-7ded-b5df-ac4a06b2b474
+Accept: application/json

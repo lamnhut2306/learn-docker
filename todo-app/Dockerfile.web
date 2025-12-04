@@ -1,0 +1,18 @@
+#1. Build
+FROM node:alpine AS build
+WORKDIR /app
+COPY src/web/package.json src/web/package-lock.json ./
+RUN --mount=type=cache,target=/root/.npm npm ci
+COPY ./src/web/ .
+RUN npm run build
+
+#2. Serve
+FROM nginx:alpine
+COPY --from=build /app/dist/Todo.Web/browser /usr/share/nginx/html
+
+# copy config template file
+COPY ./assets/config.template.json /usr/share/nginx/html/
+COPY web-entrypoint.sh /
+RUN chmod +x /web-entrypoint.sh
+
+ENTRYPOINT [ "/web-entrypoint.sh" ]

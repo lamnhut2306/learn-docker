@@ -1,0 +1,31 @@
+#1. Build
+FROM mcr.microsoft.com/dotnet/sdk:10.0-alpine AS build
+WORKDIR /src
+COPY ./src/api .
+RUN --mount=type=cache,id=nuget,target=/root/.nuget/packages \
+    dotnet publish -c Release -o /app/publish Todo.API.csproj
+
+#2. Entry
+FROM mcr.microsoft.com/dotnet/aspnet:10.0-alpine AS base
+
+# install globalization libraries
+RUN apk add --no-cache icu-libs
+ENV \
+    DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false \
+    LC_ALL=en_US.UTF-8 \
+    LANG=en_US.UTF-8
+
+WORKDIR /src/app/publish
+COPY --from=build /app/publish .
+EXPOSE 80
+ARG UID=10001
+RUN adduser \
+    --disabled-password \
+    --gecos "" \
+    --home "/nonexistent" \
+    --shell "/sbin/nologin" \
+    --no-create-home \
+    --uid "${UID}" \
+    appuser
+USER appuser
+ENTRYPOINT [ "dotnet", "Todo.API.dll" ]
