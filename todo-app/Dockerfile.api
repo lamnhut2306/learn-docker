@@ -17,6 +17,7 @@ ENV \
 
 WORKDIR /src/app/publish
 COPY --from=build /app/publish .
+EXPOSE 80
 ARG UID=10001
 RUN adduser \
     --disabled-password \
